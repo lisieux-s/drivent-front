@@ -1,18 +1,16 @@
-import { Box, Button, createTheme, ThemeProvider, Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import styled from 'styled-components';
 
-export default function OptionButton({ title, body, isSelected }) {
+export default function OptionButton({ title, body, isSelected, onClick }) {
   return (
-    <ThemeProvider theme={buttonTheme}>
-      <StyledButton isSelected={isSelected}>
-        <StyledBox>
-          <Typography variant="body1">{title}</Typography>
-          <Typography variant="body2" color="textSecondary">
-            {body}
-          </Typography>
-        </StyledBox>
-      </StyledButton>
-    </ThemeProvider>
+    <StyledButton onClick={onClick} isSelected={isSelected}>
+      <StyledBox>
+        <Typography variant="body1">{title}</Typography>
+        <Typography variant="body2" color="textSecondary">
+          {body}
+        </Typography>
+      </StyledBox>
+    </StyledButton>
   );
 }
 
@@ -35,15 +33,3 @@ const StyledButton = styled.button`
   border-radius: 20px;
   background-color: ${(props) => (props.isSelected ? '#ffeed2' : '#fff')};
 `;
-
-const buttonTheme = createTheme({
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: ({ isSelected }) => ({
-          backgroundColor: `${isSelected && '#ffeed2'}`,
-        }),
-      },
-    },
-  },
-});
